@@ -27,6 +27,7 @@ class _MyAppState extends State<MyApp> {
     if (value != 0) {
       return Future.value(new DashboardScreen());
     }
+    return null;
   }
 
   @override
