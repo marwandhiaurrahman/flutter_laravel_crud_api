@@ -13,13 +13,15 @@ class _LoginState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return FlutterLogin(
-      title: 'LoginScreen',
+      title: 'Login Screen',
       emailValidator: (value) {
         if (!value.contains('@') || !value.endsWith('.com')) {
           return "Email must contain '@' and end with '.com'";
         }
         return null;
       },
+      hideSignUpButton: true,
+      hideForgotPasswordButton: true,
       passwordValidator: (value) {
         if (value.isEmpty) {
           return 'Password is empty';
@@ -30,7 +32,7 @@ class _LoginState extends State<LoginScreen> {
         return apiController.loginUser(loginData);
       },
       onSignup: (loginData) {
-        return apiController.loginUser(loginData);
+        return null;
       },
       onSubmitAnimationCompleted: () {
         Navigator.pushReplacement(
