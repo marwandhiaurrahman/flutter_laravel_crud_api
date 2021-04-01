@@ -33,6 +33,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return SplashScreen(
+        loadingText: Text('asdasd'),
         seconds: 3,
         // navigateAfterSeconds: new LoginScreen(),
         navigateAfterFuture: loadFromFuture(),
