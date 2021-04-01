@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
+import 'package:flutter_auth/Controller/api_controller.dart';
 import 'package:flutter_login/flutter_login.dart';
-import 'users.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -9,29 +8,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginState extends State<LoginScreen> {
-  Duration get loginTime => Duration(milliseconds: timeDilation.ceil() * 2250);
-
-  Future<String> _loginUser(LoginData data) {
-    return Future.delayed(loginTime).then((_) {
-      if (!mockUsers.containsKey(data.name)) {
-        return 'Username not exists';
-      }
-      if (mockUsers[data.name] != data.password) {
-        return 'Password does not match';
-      }
-      return null;
-    });
-  }
-
-  Future<String> _recoverPassword(String name) {
-    return Future.delayed(loginTime).then((_) {
-      if (!mockUsers.containsKey(name)) {
-        return 'Username not exists';
-      }
-      return null;
-    });
-  }
-
+  ApiController apiController = new ApiController();
   @override
   Widget build(BuildContext context) {
     return FlutterLogin(
@@ -49,16 +26,10 @@ class _LoginState extends State<LoginScreen> {
         return null;
       },
       onLogin: (loginData) {
-        print('LoginScreen info');
-        print('Name: ${loginData.name}');
-        print('Password: ${loginData.password}');
-        return _loginUser(loginData);
+        return apiController.loginUser(loginData);
       },
       onSignup: (loginData) {
-        print('Signup info');
-        print('Name: ${loginData.name}');
-        print('Password: ${loginData.password}');
-        return _loginUser(loginData);
+        return apiController.loginUser(loginData);
       },
       onSubmitAnimationCompleted: () {
         Navigator.pushReplacement(
@@ -69,7 +40,7 @@ class _LoginState extends State<LoginScreen> {
       onRecoverPassword: (name) {
         print('Recover password info');
         print('Name: $name');
-        return _recoverPassword(name);
+        return apiController.recoverPassword(name);
         // Show new password dialog
       },
     );
