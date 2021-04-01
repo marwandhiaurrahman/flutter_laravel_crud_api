@@ -43,14 +43,17 @@ class RegisterController extends BaseController
      */
     public function login(Request $request)
     {
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            $user = Auth::user();
-            $success['token'] =  $user->createToken('MyApp')->accessToken;
-            $success['name'] =  $user->name;
-
-            return $this->sendResponse($success, 'User login successfully.');
-        } else {
-            return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
+        if(User::where('email','=',$request->email)->first()){
+            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+                $user = Auth::user();
+                $success['token'] =  $user->createToken('MyApp')->accessToken;
+                $success['name'] =  $user->name;
+                return $this->sendResponse($success, 'User login successfully.');
+            } else {
+                return $this->sendError('Wrong Password.', ['error' => 'Wrong Password']);
+            }
+        }else{
+            return $this->sendError('User not found.', ['error' => 'User not found']);
         }
     }
 }
