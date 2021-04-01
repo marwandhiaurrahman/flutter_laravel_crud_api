@@ -42,26 +42,6 @@ class ApiController {
     }
   }
 
-  loginData(LoginData loginData) async {
-    String myUrl = serverUrl;
-    final response = await http.post(Uri.parse(myUrl), headers: {
-      'Accept': 'application/json'
-    }, body: {
-      "email": '${loginData.name}',
-      "password": "${loginData.password}"
-    });
-
-    status = response.body.contains('error');
-    var data = json.decode(response.body);
-
-    if (status) {
-      print('data : ${data["error"]}');
-    } else {
-      print('data : ${data["token"]}');
-      _save(data["token"]);
-    }
-  }
-
   Future<String> recoverPassword(String name) {
     return Future.delayed(loginTime).then((_) {
       if (!mockUsers.containsKey(name)) {

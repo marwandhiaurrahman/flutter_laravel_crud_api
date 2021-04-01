@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Controller/api_controller.dart';
+import 'package:flutter_auth/view/dashborad_view.dart';
 import 'package:flutter_login/flutter_login.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -43,20 +44,6 @@ class _LoginState extends State<LoginScreen> {
         return apiController.recoverPassword(name);
         // Show new password dialog
       },
-    );
-  }
-}
-
-class DashboardScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Dashboard'),
-      ),
-      body: Center(
-        child: Text('asdasd'),
-      ),
     );
   }
 }

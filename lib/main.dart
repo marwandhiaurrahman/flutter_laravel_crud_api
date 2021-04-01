@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/login_screen.dart';
+import 'package:flutter_auth/view/dashborad_view.dart';
+import 'package:flutter_auth/view/login_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:splashscreen/splashscreen.dart';
 
@@ -20,9 +21,10 @@ class _MyAppState extends State<MyApp> {
     final key = 'token';
     final value = prefs.get(key) ?? 0;
     print('Token Start $value');
-    if (value == '0') {
+    if (value == 0) {
       return Future.value(new LoginScreen());
-    } else {
+    }
+    if (value != 0) {
       return Future.value(new DashboardScreen());
     }
   }
@@ -37,7 +39,7 @@ class _MyAppState extends State<MyApp> {
           'Welcome In SplashScreen',
           style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
         ),
-        image: new Image.network('https://i.imgur.com/TyCSG9A.png'),
+        // image: new Image.network('https://i.imgur.com/TyCSG9A.png'),
         backgroundColor: Colors.white,
         styleTextUnderTheLoader: new TextStyle(),
         photoSize: 100.0,
