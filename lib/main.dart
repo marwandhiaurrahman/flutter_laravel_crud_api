@@ -20,11 +20,12 @@ class _MyAppState extends State<MyApp> {
     final prefs = await SharedPreferences.getInstance();
     final key = 'token';
     final value = prefs.get(key) ?? 0;
-    print('Token Start $value');
     if (value == 0) {
+      print('Not Has Token');
       return Future.value(new LoginScreen());
     }
     if (value != 0) {
+      print('Has Token');
       return Future.value(new DashboardScreen());
     }
     return null;
